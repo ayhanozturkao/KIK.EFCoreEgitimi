@@ -11,8 +11,8 @@ using Relationship.Context;
 namespace Relationship.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230829085506_mg3")]
-    partial class mg3
+    [Migration("20230829105033_mg1")]
+    partial class mg1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,7 +77,7 @@ namespace Relationship.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(6,2)");
 
                     b.HasKey("Id");
 
@@ -96,10 +96,6 @@ namespace Relationship.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Users");
@@ -108,8 +104,7 @@ namespace Relationship.Migrations
                         new
                         {
                             Id = 1,
-                            Email = "tanersaydam@gmail.com",
-                            Name = "Taner Saydam"
+                            Email = "tanersaydam@gmail.com"
                         });
                 });
 

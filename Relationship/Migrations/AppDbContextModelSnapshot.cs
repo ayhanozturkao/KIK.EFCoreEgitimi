@@ -61,19 +61,6 @@ namespace Relationship.Migrations
                     b.ToTable("CategoryProducts");
                 });
 
-            modelBuilder.Entity("Relationship.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("Relationship.Models.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -109,6 +96,13 @@ namespace Relationship.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "tanersaydam@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("Relationship.Models.CategoryProduct", b =>
@@ -128,85 +122,6 @@ namespace Relationship.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Relationship.Models.Customer", b =>
-                {
-                    b.OwnsOne("Relationship.Models.SharedUserInformation", "SharedUserInformation", b1 =>
-                        {
-                            b1.Property<int>("CustomerId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("FullAddress")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)")
-                                .HasColumnName("Name");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("CustomerId");
-
-                            b1.ToTable("Customers");
-
-                            b1.WithOwner()
-                                .HasForeignKey("CustomerId");
-                        });
-
-                    b.Navigation("SharedUserInformation")
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Relationship.Models.User", b =>
-                {
-                    b.OwnsOne("Relationship.Models.SharedUserInformation", "SharedUserInformation", b1 =>
-                        {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("int");
-
-                            b1.Property<string>("City")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("FullAddress")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Name")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("Street")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.Property<string>("ZipCode")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("UserId");
-
-                            b1.ToTable("Users");
-
-                            b1.WithOwner()
-                                .HasForeignKey("UserId");
-                        });
-
-                    b.Navigation("SharedUserInformation")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

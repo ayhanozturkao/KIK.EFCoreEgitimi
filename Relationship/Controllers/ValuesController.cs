@@ -5,7 +5,7 @@ using Relationship.Models;
 
 namespace Relationship.Controllers;
 
-[Route("api/[controller]")]
+[Route("api/[controller]/[action]")]
 [ApiController]
 public class ValuesController : ControllerBase
 {
@@ -16,12 +16,26 @@ public class ValuesController : ControllerBase
         _context = context;
     }
 
+    //[HttpGet]
+    //public IActionResult Delete(int id)
+    //{
+    //    Category category = new() { Id = id };
+    //    _context.Remove(category);
+    //    _context.SaveChanges();
+    //    return NoContent();
+    //}
+
     [HttpGet]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> GetUserById(int id)
     {
-        Category category = new() { Id = id };
-        _context.Remove(category);
-        _context.SaveChanges();
-        return NoContent();
+        Models.User user = await _context.Users.FindAsync(id);
+        return Ok(user);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetUserByIdCompiled(int id)
+    {
+        Models.User user = await _context.GetUserByIdCompiled(id);
+        return Ok(user);
     }
 }
